@@ -29,7 +29,7 @@ Globals:
     Timeout: 181
     Handler: handler.handler
     AutoPublishAlias: PROD
-    MemorySize: 4096
+    MemorySize: 3007
     Environment:
       Variables:
         BUCKET_NAME: !Ref BucketName
