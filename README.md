@@ -128,7 +128,7 @@ This section provides a cost analysis for the Lambda function based on the provi
 - Average Execution Time: 1.49 seconds
 - Number of Invocations per hour: 1000,000
 - 30 days in a month
-- Price per GB-second for 3072 MB RAM: $0.00005
+- Price per GB-second for 1024 MB RAM: $0.0000167
 - Request Cost: $0.20 per 1M requests
 
 ## Cost Calculation
