@@ -1,4 +1,4 @@
-from zipfile import ZipFile
+from zipfile import ZipFile, ZIP_DEFLATED
 import os
 import json 
 import logging 
@@ -12,7 +12,7 @@ logger.setLevel(logging.INFO)
 def zip_file(source_file,output_file):
 
     try:
-        with ZipFile(output_file,'w') as zip:
+        with ZipFile(output_file,'w',compression=ZIP_DEFLATED) as zip:
             zip.write(source_file, arcname=os.path.basename(source_file))
 
         logger.info(f"File {os.path.basename(source_file)} has been zipped.")
