@@ -15,12 +15,12 @@ Parameters:
   BucketName:
     NoEcho: true
     Type: "String"
-    Default: "zip-automation-lambda-bucket"
+    Default: "zip-automation-bucket"
     Description: "env name"
   S3KEY:
     NoEcho: true
     Type: "String"
-    Default: "zip_automation_function"
+    Default: "zip-automation-key"
     Description: "env name"
 
 Globals:
