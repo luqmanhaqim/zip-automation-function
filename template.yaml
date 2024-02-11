@@ -117,6 +117,10 @@ Resources:
                   - Name: suffix
                     Value: .json
 
+  ###############################
+  #########  TASK 2  ############
+  ###############################
+
   AppBucket:
     Type: AWS::S3::Bucket
     Properties:
