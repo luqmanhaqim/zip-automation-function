@@ -54,7 +54,7 @@ jobs:
 
       - name: Build resources
         run: |
-          sam build --template ${SAM_TEMPLATE} --use-container
+          sam build --skip-pull-image --template ${SAM_TEMPLATE} --use-container
           ls -la
 
       - name: Assume the testing pipeline user role
@@ -129,7 +129,7 @@ jobs:
           use-installer: true
       - name: Build resources
         run: |
-            sam build --template ${SAM_TEMPLATE} --use-container
+            sam build --skip-pull-image --template ${SAM_TEMPLATE} --use-container
             ls -la
 
       - name: Assume the prod pipeline user role
