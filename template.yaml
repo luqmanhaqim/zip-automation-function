@@ -75,7 +75,7 @@ Resources:
                   - "s3:PutObject"
                   - "s3:DeleteObject"
                 Resource:
-                  - !Sub "arn:aws:s3:::${BucketName}/*"
+                  - !Sub "arn:aws:s3:::${ENV}-${BucketName}/*"
   lambdaLogGroup:
     Type: "AWS::Logs::LogGroup"
     Properties:
