@@ -1,0 +1,6 @@
+.aws-sam
+node_modules
+zip-automation-function-sam
+__pycache__
+venv
+*.zip

@@ -1,0 +1,43 @@
+{
+  "video_id": "123456789",
+  "title": "Sample Video Title",
+  "duration": "00:10:30",
+  "resolution": "1920x1080",
+  "bitrate": "8000 kbps",
+  "format": "MP4",
+  "processing_logs": [
+    {
+      "timestamp": "2024-02-10T12:00:00Z",
+      "message": "Started video processing"
+    },
+    {
+      "timestamp": "2024-02-10T12:05:00Z",
+      "message": "Extracted audio track"
+    },
+    {
+      "timestamp": "2024-02-10T12:10:00Z",
+      "message": "Applied color correction"
+    },
+    {
+      "timestamp": "2024-02-10T12:15:00Z",
+      "message": "Completed video processing"
+    }
+  ],
+  "analysis_results": {
+    "object_detection": [
+      {
+        "object": "person",
+        "count": 10
+      },
+      {
+        "object": "car",
+        "count": 5
+      }
+    ],
+    "sentiment_analysis": {
+      "positive": 60,
+      "negative": 20,
+      "neutral": 20
+    }
+  }
+}
