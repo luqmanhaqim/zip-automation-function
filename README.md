@@ -109,5 +109,77 @@ source env/bin/activate
 - The pull request will be approved upon code review completion.
 
 
+# Task 4: Cost Analysis
+
+## Overview
+This section provides a cost analysis for the Lambda function based on the provided specifications and pricing information.
+
+## Assumption
+- Allocated Memory for Lambda Function: 3072 MB
+- Average Execution Time: 3.5 seconds
+- Number of Invocations per hour: 1000,000
+- 30 days in a month
+- Price per GB-second for 3072 MB RAM: $0.00005
+- Request Cost: $0.20 per 1M requests
+
+## Cost Calculation
+1.**Lambda Pricing Formula:**
+  Total Cost = [Total Invocation per month * (Execution Duration Price * Price per GB-second)] + Total Request Cost
+
+
+2. **Duration Cost per Invocation:**
+   - Calculate the execution duration price:
+     ```
+     Execution Duration Price = Memory Allocated * Time to Run Job
+                         = 3.072 GB * 3.5 seconds
+                         = 10.752 GB-seconds
+     ```
+   - Calculate the duration cost per invocation:
+     ```
+     Duration Cost per Invocation = Execution Duration Price * Price per GB-second
+                                   = 10.752 GB-seconds * $0.00005
+                                   = $0.0005376
+     ```
+
+3. **Request Cost:**
+   - Number of Invocations per day : 1000,000
+    ```
+     Number of Invocation per month = (Number of Invocations per day * 24) * 30
+                        = (1,000,000 * 24) * 30
+                        = 720,000,000
+     ```
+
+
+   - Cost per 1M requests: $0.20
+   - Total Request Cost:
+     ```
+     Total Request Cost = (Number of Invocations per Month / 1,000,000) * Request Cost
+                        = (720,000,000 / 1,000,000) * $0.20
+                        = $144.00
+     ```
+
+4. **Total Monthly Cost:**
+   - Calculate the total monthly cost by summing the duration cost per invocation and the request cost:
+     ```
+     Total Monthly Cost = (Duration Cost per Invocation * Number of Runs) + Total Request Cost
+                        = ($0.0005376 * 720,000,000) + $144.00
+                        = $387,072 + $144.00
+                        = $387,216
+     ```
+
+## Summary 
+Based on the provided specifications and pricing information, the expected monthly cost for the Lambda function is approximately $387,216 USD.
+
+## Suggestion
+
+### Optimize Memory Allocation
+
+Evaluate the memory requirements of the Lambda function and adjust the allocated memory accordingly. This can be achieved by continuously analyzing historical usage patterns and performance metrics. Determine if the current memory allocation is optimal. In some cases, reducing memory allocation can lead to significant cost savings without impacting performance. AWS CloudWatch is a valuable tool for monitoring Lambda performance, and when coupled with CloudWatch Insights monitoring, it can result in significant cost optimization 
+
+### Architecture Adjustment
+
+Consider adjusting the architecture of the Lambda function to better align with the requirements and workload characteristics. For example, the picture below illustrates an event-driven workflow designed for improved efficiency by allowing the Lambda function to process incoming data according to the size of the file. Architecture adjustments can enhance resource utilization, reduce execution time, and ultimately lead to cost savings. 
+
+![image](https://github.com/luqmanhaqim/zip-automation-function/assets/114890362/769feb9c-c731-496a-8db2-44f5bb502b76)
 
 
