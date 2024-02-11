@@ -15,12 +15,12 @@ Parameters:
   BucketName:
     NoEcho: true
     Type: "String"
-    Default: "zip-automation-lambda-bucket"
+    Default: "zip-automation-bucket"
     Description: "env name"
   S3KEY:
     NoEcho: true
     Type: "String"
-    Default: "zip_automation_function"
+    Default: "zip-automation-key"
     Description: "env name"
 
 Globals:
@@ -75,7 +75,7 @@ Resources:
                   - "s3:PutObject"
                   - "s3:DeleteObject"
                 Resource:
-                  - !Sub "arn:aws:s3:::${BucketName}/*"
+                  - !Sub "arn:aws:s3:::${ENV}-${BucketName}/*"
   lambdaLogGroup:
     Type: "AWS::Logs::LogGroup"
     Properties:
@@ -117,10 +117,14 @@ Resources:
                   - Name: suffix
                     Value: .json
 
+  ###############################
+  #########  TASK 2  ############
+  ###############################
+
   AppBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Ref BucketName
+      BucketName: !Sub "${ENV}-${BucketName}"
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - BucketKeyEnabled: true
