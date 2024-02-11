@@ -30,6 +30,31 @@ The objective of this repository is to achieve the following tasks:
 
 4. **CI/CD - GitHub Actions**
    - GitHub Actions are used for continuous integration and deployment, automating the build, test, and deployment process of the Lambda function and CloudFormation stack.
+   
+## Environment Setup
+
+Follow these steps to set up your development environment:
+
+### 1. Python 3.10
+
+Make sure you have Python 3.10 installed on your system. You can download Python from the [official website](https://www.python.org/downloads/).
+
+### 2. Create Virtual Environment
+
+Create a virtual environment using `venv` (built-in with Python 3) or `virtualenv`:
+
+```bash
+# Using venv
+python3 -m venv venv
+
+# Activate virtualenv
+
+# On Windows
+.\env\Scripts\activate
+
+# On macOS/Linux
+source env/bin/activate
+```
 
 ## How to Use
 
@@ -37,19 +62,23 @@ The objective of this repository is to achieve the following tasks:
    `https://github.com/luqmanhaqim/zip-automation-function.git`
    
 2. **Add GitHub Secrets**
-- Add necessary secrets to the GitHub repository's environment secrets. Refer to the table below for the required secrets:
+- Add necessary secrets to the GitHub repository's environment secrets. Refer to the table below for the required secrets/ environment variables:
 
-| Environment Variable                  | Key                               | Description                                      |
-|---------------------------------------|-----------------------------------|--------------------------------------------------|
-| PIPELINE_USER_ACCESS_KEY_ID           | AWS_ACCESS_KEY_ID                 | AWS Access Key ID for pipeline user              |
-| PIPELINE_USER_SECRET_ACCESS_KEY       | AWS_SECRET_ACCESS_KEY             | AWS Secret Access Key for pipeline user          |
-| TESTING_PIPELINE_EXECUTION_ROLE       | TESTING_PIPELINE_EXECUTION_ROLE   | Role for executing the testing pipeline          |
-| TESTING_CLOUDFORMATION_EXECUTION_ROLE | TESTING_CLOUDFORMATION_EXECUTION_ROLE | Role for executing CloudFormation in testing |
-| TESTING_ARTIFACTS_BUCKET              | TESTING_ARTIFACTS_BUCKET          | Bucket name for storing artifacts in testing     |
-| PROD_PIPELINE_EXECUTION_ROLE          | PROD_PIPELINE_EXECUTION_ROLE      | Role for executing the production pipeline       |
-| PROD_CLOUDFORMATION_EXECUTION_ROLE    | PROD_CLOUDFORMATION_EXECUTION_ROLE | Role for executing CloudFormation in production |
-| PROD_ARTIFACTS_BUCKET                 | PROD_ARTIFACTS_BUCKET             | Bucket name for storing artifacts in production  |
-
+| Environment Variable                  | Description                                      |
+|---------------------------------------|--------------------------------------------------|
+| PIPELINE_USER_ACCESS_KEY_ID           | AWS Access Key ID for pipeline user              |
+| PIPELINE_USER_SECRET_ACCESS_KEY       | AWS Secret Access Key for pipeline user          |
+| SAM_TEMPLATE                          | Name of the SAM template file                    |
+| TESTING_STACK_NAME                    | Name of the testing CloudFormation stack         |
+| TESTING_PIPELINE_EXECUTION_ROLE       | Role for executing the testing pipeline          |
+| TESTING_CLOUDFORMATION_EXECUTION_ROLE | Role for executing CloudFormation in testing     |
+| TESTING_ARTIFACTS_BUCKET              | Bucket name for storing artifacts in testing     |
+| TESTING_REGION                        | AWS region for testing environment               |
+| PROD_STACK_NAME                       | Name of the production CloudFormation stack      |
+| PROD_PIPELINE_EXECUTION_ROLE          | Role for executing the production pipeline       |
+| PROD_CLOUDFORMATION_EXECUTION_ROLE    | Role for executing CloudFormation in production  |
+| PROD_ARTIFACTS_BUCKET                 | Bucket name for storing artifacts in production  |
+| PROD_REGION                           | AWS region for production environment            |
 
 
 3. **Push Changes to Trigger Pipeline**
