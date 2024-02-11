@@ -53,7 +53,9 @@ jobs:
           use-installer: true
 
       - name: Build resources
-        run: sam build --template ${SAM_TEMPLATE} --use-container
+        run: |
+          sam build --template ${SAM_TEMPLATE} --use-container
+          ls -la
 
       - name: Assume the testing pipeline user role
         uses: aws-actions/configure-aws-credentials@v1-node16
