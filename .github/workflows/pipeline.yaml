@@ -24,12 +24,22 @@ env:
 
 jobs:
   test:
+    environment: dev
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          # trigger the tests here
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11"
+      - name: Install Bandit
+        run: pip install bandit
+      - name: Run Bandit and save output to file
+        run: |
+          bandit -r . || true
+          ls -la
 
   build-and-package:
     if: github.ref == 'refs/heads/main'
@@ -131,9 +141,6 @@ jobs:
     needs: [deploy-testing]
     runs-on: ubuntu-latest
     environment: production
-    # Configure GitHub Action Environment to have a manual approval step before deployment to production
-    # https://docs.github.com/en/actions/reference/environments
-    # environment: <configured-environment>
     steps:
       - uses: actions/checkout@v3
       - uses: aws-actions/setup-sam@v2
