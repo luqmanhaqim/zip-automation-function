@@ -28,3 +28,4 @@ def read_object_from_s3(s3,bucket_name, object_key):
     except Exception as e:
         logger.error(f"An error occurred while reading from S3: {str(e)}")
         return None
+    
