@@ -116,7 +116,7 @@ This section provides a cost analysis for the Lambda function based on the provi
 
 ## Assumption
 - Allocated Memory for Lambda Function: 3072 MB
-- Average Execution Time: 3.5 seconds
+- Average Execution Time: 1.49 seconds
 - Number of Invocations per hour: 1000,000
 - 30 days in a month
 - Price per GB-second for 3072 MB RAM: $0.00005
@@ -131,14 +131,14 @@ This section provides a cost analysis for the Lambda function based on the provi
    - Calculate the execution duration price:
      ```
      Execution Duration Price = Memory Allocated * Time to Run Job
-                         = 3.072 GB * 3.5 seconds
-                         = 10.752 GB-seconds
+                         = 1.024 GB * 1.49 seconds
+                         = 1.526 GB-seconds
      ```
    - Calculate the duration cost per invocation:
      ```
      Duration Cost per Invocation = Execution Duration Price * Price per GB-second
-                                   = 10.752 GB-seconds * $0.00005
-                                   = $0.0005376
+                                   = 1.526 GB-seconds * 0.0000167
+                                   = $0.0000254842
      ```
 
 3. **Request Cost:**
@@ -162,13 +162,13 @@ This section provides a cost analysis for the Lambda function based on the provi
    - Calculate the total monthly cost by summing the duration cost per invocation and the request cost:
      ```
      Total Monthly Cost = (Duration Cost per Invocation * Number of Runs) + Total Request Cost
-                        = ($0.0005376 * 720,000,000) + $144.00
-                        = $387,072 + $144.00
-                        = $387,216
+                        = ($0.0000254842 * 720,000,000) + $144.00
+                        = $18,348.62 + $144.00
+                        = $18,492.62
      ```
 
 ## Summary 
-Based on the provided specifications and pricing information, the expected monthly cost for the Lambda function is approximately $387,216 USD.
+Based on the provided specifications and pricing information, the expected monthly cost for the Lambda function is approximately $18,492.62 USD.
 
 ## Suggestion
 
