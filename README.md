@@ -16,6 +16,10 @@ The objective of this repository is to achieve the following tasks:
 2. **Task 2: CloudFormation Template**
    - Create an S3 bucket and connect it to the Lambda function using CloudFormation.
    - The CloudFormation template (`template.yaml`) defines the stack including the S3 bucket and Lambda function, ensuring they are deployed together.
+     
+3. **Task 3: Documentation and Version Control**
+   - Commit changes using best practices from the beginning to the end.
+   - Push changes to a public repository and add documentation to the project by adding a README file.
 
 ## Components
 
