@@ -176,5 +176,10 @@ Based on the provided specifications and pricing information, the expected month
 
 Evaluate the memory requirements of the Lambda function and adjust the allocated memory accordingly. This can be achieved by continuously analyzing historical usage patterns and performance metrics. Determine if the current memory allocation is optimal. In some cases, reducing memory allocation can lead to significant cost savings without impacting performance. AWS CloudWatch is a valuable tool for monitoring Lambda performance, and when coupled with CloudWatch Insights monitoring, it can result in significant cost optimization 
 
+### Architecture Adjustment
+
+Consider adjusting the architecture of the Lambda function to better align with the requirements and workload characteristics. For example, the picture below illustrates an event-driven workflow designed for improved efficiency by allowing the Lambda function to process incoming data according to the size of the file. Architecture adjustments can enhance resource utilization, reduce execution time, and ultimately lead to cost savings. 
+
+![image](https://github.com/luqmanhaqim/zip-automation-function/assets/114890362/769feb9c-c731-496a-8db2-44f5bb502b76)
 
 
