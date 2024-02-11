@@ -1,25 +1,110 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  zip-automation-function-sam
+Description: "CI/CD Sam Serverless"
 Parameters:
-  AppBucketName:
-    Type: String
-    Description: 'REQUIRED: Unique S3 bucket name to use for the app.'
+  ENV:
+    NoEcho: true
+    Type: "String"
+    Default: "dev"
+    Description: "env name"
+  FunctionName:
+    NoEcho: true
+    Type: "String"
+    Default: "zip-automation-lambda"
+    Description: "env name"
+  BucketName:
+    NoEcho: true
+    Type: "String"
+    Default: "zip-automation-lambda-bucket"
+    Description: "env name"
+  S3KEY:
+    NoEcho: true
+    Type: "String"
+    Default: "zip_automation_function"
+    Description: "env name"
+
+Globals:
+  Function:
+    Runtime: "python3.10"
+    Timeout: 181
+    Handler: handler.handler
+    AutoPublishAlias: PROD
+    MemorySize: 1024
+    Environment:
+      Variables:
+        BUCKET_NAME: !Ref BucketName
+        S3_KEY: !Ref S3KEY
 
 Resources:
-  S3JsonLoggerFunction:
+  lambdaIAMRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName:
+        Fn::Sub: "${ENV}-${FunctionName}-Lambda-Role"
+      Description: Lambda Function Resource Role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action:
+              - "sts:AssumeRole"
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+      Path: /
+      Policies:
+        - PolicyName: "CloudWatch"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                Resource:
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${ENV}-${FunctionName}:*"
+
+        - PolicyName: "S3_Lambda_Permission"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "s3:GetObject"
+                  - "s3:PutObject"
+                  - "s3:DeleteObject"
+                Resource:
+                  - !Sub "arn:aws:s3:::${BucketName}/*"
+  lambdaLogGroup:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${ENV}-${FunctionName}"
+      RetentionInDays: 90
+
+  LambdaInvokePermission:
+    DependsOn:
+      - AppBucket
+
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      FunctionName: !GetAtt lambdaFunction.Arn
+      Action: "lambda:InvokeFunction"
+      Principal: "s3.amazonaws.com"
+      SourceAccount: !Sub ${AWS::AccountId}
+      SourceArn: !GetAtt AppBucket.Arn
+
+  lambdaFunction:
+    DependsOn:
+      - lambdaIAMRole
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/s3-json-logger.s3JsonLoggerHandler
-      Runtime: nodejs20.x
-      Architectures:
-      - x86_64
-      MemorySize: 128
-      Timeout: 60
-      Policies:
-        S3ReadPolicy:
-          BucketName: !Ref AppBucketName
+      Description: "Zip Automation Function"
+      FunctionName:
+        Fn::Sub: "${ENV}-${FunctionName}"
+      Handler: handler.handler
+      Role: !GetAtt "lambdaIAMRole.Arn"
+      CodeUri: .
       Events:
         S3NewObjectEvent:
           Type: S3
@@ -29,19 +114,26 @@ Resources:
             Filter:
               S3Key:
                 Rules:
-                - Name: suffix
-                  Value: .json
+                  - Name: suffix
+                    Value: .json
+
   AppBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Ref AppBucketName
+      BucketName: !Ref BucketName
       BucketEncryption:
         ServerSideEncryptionConfiguration:
-        - BucketKeyEnabled: true
+          - BucketKeyEnabled: true
       VersioningConfiguration:
         Status: Enabled
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
-Globals:
-  Function:
-    LoggingConfig:
-      LogFormat: JSON
+
+Outputs:
+  lambdaArn:
+    Value: !GetAtt "lambdaFunction.Arn"
+    Description: "ARN for lambda"
+    Export:
+      Name: !Sub "${AWS::StackName}-${FunctionName}-Arn"
+  lambdaName:
+    Value: !Ref lambdaFunction
+    Export:
+      Name: !Sub "${AWS::StackName}-funcName"

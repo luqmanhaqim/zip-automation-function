@@ -1,14 +1,15 @@
 import boto3
+import os
+from src.functions import event_handler
 
-from src.functions import zipFile
 
+def handler(event, context):
+    try:
+        s3_client = boto3.client('s3')
+        event_handler(s3_client, event)
+        return "Function has been executed"
+    
+    except Exception as e:
 
-
-def handler():
-    source_file = r"C:\python\Automation\zip automation function\test_file.json"
-    output_file = r"C:\python\Automation\zip automation function\test_file.zip"
-
-    return zipFile(source_file, output_file)
-
-if __name__ == "__main__":
-    handler()
+        print(f"An error occurred: {str(e)}")
+        return "An error occurred during function execution"
