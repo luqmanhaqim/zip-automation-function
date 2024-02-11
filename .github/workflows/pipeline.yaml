@@ -16,18 +16,18 @@ env:
   TESTING_ARTIFACTS_BUCKET: ${{ secrets.TESTING_ARTIFACTS_BUCKET }}
   TESTING_REGION: ap-southeast-1
 
-  PROD_STACK_NAME: zip automation function prod
-  PROD_PIPELINE_EXECUTION_ROLE: ${{ secrets.PROD_PIPELINE_EXECUTION_ROLE }}
-  PROD_CLOUDFORMATION_EXECUTION_ROLE: ${{ secrets.PROD_CLOUDFORMATION_EXECUTION_ROLE }}
-  PROD_ARTIFACTS_BUCKET: ${{ secrets.PROD_ARTIFACTS_BUCKET }}
-  PROD_REGION: ap-southeast-1
+  # PROD_STACK_NAME: zip automation function prod
+  # PROD_PIPELINE_EXECUTION_ROLE: ${{ secrets.PROD_PIPELINE_EXECUTION_ROLE }}
+  # PROD_CLOUDFORMATION_EXECUTION_ROLE: ${{ secrets.PROD_CLOUDFORMATION_EXECUTION_ROLE }}
+  # PROD_ARTIFACTS_BUCKET: ${{ secrets.PROD_ARTIFACTS_BUCKET }}
+  # PROD_REGION: ap-southeast-1
 
 jobs:
   test:
-    environment: dev
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     continue-on-error: true
+    environment: dev
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
