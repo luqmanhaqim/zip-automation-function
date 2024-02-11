@@ -3,7 +3,7 @@
 # AWS Lambda S3 Object Compression
 
 ## Overview
-This repository contains the code and infrastructure as code (IAC) to automate the compression of newly added objects in an Amazon S3 bucket using an AWS Lambda function triggered by AWS SAM (Serverless Application Model). The compressed objects are then uploaded back to the same S3 bucket, and the original objects are deleted.
+This repository contains the code and infrastructure as code (IAC) to automate the compression of newly added objects in an Amazon S3 bucket using an AWS Lambda function. The compressed objects are then uploaded back to the same S3 bucket, and the original objects are deleted. The deployment and management of the Lambda function are facilitated by AWS SAM (Serverless Application Model).
 
 ### Objective
 The objective of this repository is to achieve the following tasks:
@@ -20,7 +20,15 @@ The objective of this repository is to achieve the following tasks:
 3. **Task 3: Documentation and Version Control**
    - Commit changes using best practices from the beginning to the end.
    - Push changes to a public repository and add documentation to the project by adding a README file.
+     
+4. **Task 4: Cost Analysis**
+   - Perform a cost analysis to estimate the monthly expenses incurred after implementing the solution.
+   - Provide recommendations or cost-saving strategies to optimize expenses.
 
+5. **Task 5: Scalability and Potential Bottlenecks**
+   - Evaluate the scalability of the solution, considering AWS Lambda's ability to automatically scale based on demand.
+   - Identify potential bottlenecks that could impact system performance, such as concurrency limits or resource constraints.
+   
 ## Components
 
 1. **Code (Python)**
@@ -115,7 +123,8 @@ source env/bin/activate
 This section provides a cost analysis for the Lambda function based on the provided specifications and pricing information.
 
 ## Assumption
-- Allocated Memory for Lambda Function: 3072 MB
+- Allocated Memory for Lambda Function: 1024 MB
+- Average file size of 10 MB
 - Average Execution Time: 1.49 seconds
 - Number of Invocations per hour: 1000,000
 - 30 days in a month
