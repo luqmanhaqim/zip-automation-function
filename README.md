@@ -182,12 +182,12 @@ Consider adjusting the architecture of the Lambda function to better align with 
 
 ![image](https://github.com/luqmanhaqim/zip-automation-function/assets/114890362/769feb9c-c731-496a-8db2-44f5bb502b76)
 
-### Task 5: Scalability and Potential Bottlenecks
+# Task 5: Scalability and Potential Bottlenecks
 
-#### Scalability Assessment
+### Scalability Assessment
 The solution is scalable, as AWS lambda can automatically handle varying workloads by scaling up or down based on demand. However, it is important for us to identify the potential bottlenecks that may impede the performance of our automation.
 
-#### Potential Bottlenecks
+### Potential Bottlenecks
 
 1. **Concurrency Limits**: AWS Lambda has concurrency limits that may impact its ability to handle sudden spikes in incoming requests. It's important to monitor and adjust these limits to avoid performance degradation during peak loads.
 
@@ -195,7 +195,7 @@ The solution is scalable, as AWS lambda can automatically handle varying workloa
 
 3. **Dependency Constraints**: Lambda functions may depend on external resources like layers, which have size limits. Bottlenecks may occur if these dependencies fail or are overwhelmed. Robust error handling and fallback mechanisms are essential to mitigate such issues.
 
-#### Mitigation Strategies
+### Mitigation Strategies
 To address potential bottlenecks and ensure scalability:
 
 - Monitor concurrency settings to flexibly handle fluctuations in workload.
