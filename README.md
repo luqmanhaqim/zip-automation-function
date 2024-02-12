@@ -68,6 +68,12 @@ python3 -m venv venv
 source env/bin/activate
 ```
 
+### 3. Install dependencies 
+
+```bash
+pip install -r requirements.txt
+```
+
 ## How to Use
 
 1. **Clone Repository :** 
