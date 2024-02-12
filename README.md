@@ -126,7 +126,7 @@ This section provides a cost analysis for the Lambda function based on the provi
 - Allocated Memory for Lambda Function: 1024 MB
 - Average file size of 10 MB
 - Average Execution Time: 1.49 seconds
-- Number of Invocations per hour: 1000,000
+- Number of Invocations per hour: 1,000,000
 - 30 days in a month
 - Price per GB-second for 1024 MB RAM: $0.0000167
 - Request Cost: $0.20 per 1M requests
@@ -151,9 +151,9 @@ This section provides a cost analysis for the Lambda function based on the provi
      ```
 
 3. **Request Cost:**
-   - Number of Invocations per day : 1000,000
+   - Number of Invocations per hour: 1,000,000
     ```
-     Number of Invocation per month = (Number of Invocations per day * 24) * 30
+     Number of Invocation per month = (Number of Invocations per hour * 24) * 30
                         = (1,000,000 * 24) * 30
                         = 720,000,000
      ```
@@ -183,7 +183,7 @@ Based on the provided specifications and pricing information, the expected month
 
 ### Optimize Memory Allocation
 
-Evaluate the memory requirements of the Lambda function and adjust the allocated memory accordingly. This can be achieved by continuously analyzing historical usage patterns and performance metrics. Determine if the current memory allocation is optimal. In some cases, reducing memory allocation can lead to significant cost savings without impacting performance. AWS CloudWatch is a valuable tool for monitoring Lambda performance, and when coupled with CloudWatch Insights monitoring, it can result in significant cost optimization 
+Evaluate the memory requirements of the Lambda function and adjust the allocated memory accordingly. This can be achieved by continuously analyzing historical usage patterns and performance metrics example tool that can be used is AWS CloudWatch. Determine if the current memory allocation is optimal. In some cases, reducing memory allocation can lead to significant cost savings without impacting performance. AWS CloudWatch is a valuable tool for monitoring Lambda performance, and when coupled with CloudWatch Insights monitoring, it can result in significant cost optimization 
 
 ### Architecture Adjustment
 
@@ -198,16 +198,16 @@ The solution is scalable, as AWS lambda can automatically handle varying workloa
 
 ### Potential Bottlenecks
 
-1. **Concurrency Limits**: AWS Lambda has concurrency limits that may impact its ability to handle sudden spikes in incoming requests. It's important to monitor and adjust these limits to avoid performance degradation during peak loads.
+1. **Concurrency Limits**: AWS Lambda has concurrency limits that may impact its ability to handle sudden spikes in incoming requests. It's important to monitor and adjust these limits to avoid performance issues. Lambda concurrency limit needs to be requested as the default concurrency per region is 1000 invocations at a time. [official website]([https://www.python.org/downloads/](https://repost.aws/knowledge-center/lambda-concurrency-limit-increase)).
 
 2. **Resource Allocation**: Inadequate memory allocation or improper resource configuration can lead to performance bottlenecks. It's essential to carefully allocate resources and optimize function configurations to meet the demands of your application.
 
-3. **Dependency Constraints**: Lambda functions may depend on external resources like layers, which have size limits. Bottlenecks may occur if these dependencies fail or are overwhelmed. Robust error handling and fallback mechanisms are essential to mitigate such issues.
+3. **Dependency Constraints**: Lambda functions may depend on external resources like layers, which have size limits. Bottlenecks may occur if these dependencies fail or are overwhelmed.
 
 ### Mitigation Strategies
 To address potential bottlenecks and ensure scalability:
 
 - Monitor concurrency settings to flexibly handle fluctuations in workload.
 - Fine-tune resource allocation and function setups for better efficiency and performance.
-- Integrate resilient designs and error-handling methods to lessen the effects of external dependencies or failures.
-- Continuously assess and refine your Lambda functions and related resources to uphold top-notch performance in the long run.
+- Continuously assess and refine your Lambda functions and related resources to ensure performance in the long run for example integrating EFS with lambda to avoid having dependency constraints due to layers reaching it's size limit.
+- Integrate Lambda with a monitoring tool such as Grafana to gain deeper insights into performance metrics and resource utilization, this may be beneficial as we can get better visibility of our lambda's performance.
