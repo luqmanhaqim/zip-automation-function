@@ -198,7 +198,7 @@ The solution is scalable, as AWS lambda can automatically handle varying workloa
 
 ### Potential Bottlenecks
 
-1. **Concurrency Limits**: AWS Lambda has concurrency limits that may impact its ability to handle sudden spikes in incoming requests. It's important to monitor and adjust these limits to avoid performance issues. Lambda concurrency limit needs to be requested as the default concurrency per region is 1000 invocations at a time. [official website]([https://www.python.org/downloads/](https://repost.aws/knowledge-center/lambda-concurrency-limit-increase)).
+1. **Concurrency Limits**: AWS Lambda has concurrency limits that may impact its ability to handle sudden spikes in incoming requests. It's important to monitor and adjust these limits to avoid performance issues. Lambda concurrency limit needs to be requested as the default concurrency per region is 1000 invocations at a time. [official website](https://repost.aws/knowledge-center/lambda-concurrency-limit-increase).
 
 2. **Resource Allocation**: Inadequate memory allocation or improper resource configuration can lead to performance bottlenecks. It's essential to carefully allocate resources and optimize function configurations to meet the demands of your application.
 
